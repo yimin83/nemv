@@ -4,7 +4,8 @@
     <v-subheader>베스트룸</v-subheader>
     <v-layout row wrap justify-center>
       <v-flex
-          v-for="room in rooms" v-if="room.beBestRoom == true"
+          v-for="room in rooms"
+          v-if="room.beBestRoom == true"
           :key="room"
           xs10 sm6 md4 lg2 xl2
           text-xs-center
@@ -132,7 +133,8 @@
     <v-divider class="my-1"></v-divider>
     <v-layout row wrap>
       <v-flex
-          v-for="room in rooms" v-if="room.roomNo < 1501"
+          v-for="room in rooms"
+          v-if="room.roomNo < 1501"
           :key="room"
           xs10 sm6 md4 lg2 xl2
         >
@@ -262,7 +264,8 @@
     <v-divider class="my-1"></v-divider>
     <v-layout row wrap>
       <v-flex
-          v-for="room in rooms" v-if="room.roomNo < 1601"
+          v-for="room in rooms"
+          v-if=" room.roomNo > 1500 && room.roomNo < 1601"
           :key="room"
           xs10 sm6 md4 lg2 xl2
         >
@@ -746,8 +749,7 @@ export default {
   mounted () {
     axios.get('http://localhost:3000/api/rooms')
       .then((r) => {
-        this.rooms = r.data.rooms
-        console.log(r)
+        this.rooms = r.data
       })
       .catch((e) => {
         console.error(e.message)
@@ -767,86 +769,6 @@ export default {
       roomTitle: '예약 정보',
       settingTitle: '설정',
       rooms: [],
-      // rooms: [
-      //   { roomNo: 1301, type: 18, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1302, type: 18, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1303, type: 18, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1304, type: 18, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1305, type: 18, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1306, type: 18, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1307, type: 18, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1308, type: 18, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1309, type: 25, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1310, type: 25, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1311, type: 25, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1312, type: 25, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1313, type: 25, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1314, type: 25, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1315, type: 25, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1316, type: 30, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1317, type: 30, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1318, type: 30, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1319, type: 30, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1320, type: 30, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1321, type: 30, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1322, type: 30, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1323, type: 30, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1324, type: 30, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1325, type: 30, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1501, type: 18, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1502, type: 18, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1503, type: 18, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1504, type: 18, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1505, type: 18, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1506, type: 18, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1507, type: 18, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1508, type: 18, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1509, type: 25, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1510, type: 25, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1511, type: 25, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1512, type: 25, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1513, type: 25, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1514, type: 25, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1515, type: 25, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1516, type: 30, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1517, type: 30, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1518, type: 30, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1519, type: 30, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1520, type: 30, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1521, type: 30, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1522, type: 30, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1523, type: 30, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1524, type: 30, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1525, type: 30, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1526, type: 30, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1601, type: 18, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1602, type: 18, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1603, type: 18, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1604, type: 18, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1605, type: 18, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1606, type: 18, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1607, type: 18, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1608, type: 18, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1609, type: 25, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1610, type: 25, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1611, type: 25, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1612, type: 25, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1613, type: 25, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1614, type: 25, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1615, type: 25, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1616, type: 30, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1617, type: 30, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1618, type: 30, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1619, type: 30, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1620, type: 30, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1621, type: 30, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1622, type: 30, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1623, type: 30, pos: 'mnt', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1624, type: 30, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1625, type: 30, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1626, type: 30, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false },
-      //   { roomNo: 1627, type: 30, pos: 'sea', smartTemp: 23.0, setTemp: 25.0, beReserved: false, subsName: '', subsTel: '', resDate: '', peopleCnt: 0, startDate: '', endDate: '', inTime: '', outTime: '', bestTogle: false, togle: false, beSmart: true, beBestRoom: false }
-      // ],
       roomInfo: {
         roomNo: 101,
         type: 18,
