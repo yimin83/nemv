@@ -5,14 +5,14 @@
     <v-layout row wrap justify-center>
       <v-flex
           v-for="room in rooms"
-          v-if="room.beBestRoom == true"
+          v-if="room.isBestRoom == true"
           :key="room"
           xs10 sm6 md4 lg2 xl2
           text-xs-center
         >
         <v-item>
           <v-card>
-            <div v-if="room.type == 18">
+            <div v-if="room.roomType == 18">
               <div v-if="room.beReserved == false">
                 <v-img
                   :src="image1_src"
@@ -37,7 +37,7 @@
                 </v-img>
               </div>
             </div>
-            <div v-else-if="room.type == 30">
+            <div v-else-if="room.roomType == 30">
               <div v-if="room.beReserved == false">
                 <v-img
                   :src="image3_src"
@@ -89,7 +89,7 @@
             </div>
             <v-card-title primary-title>
               <div style="margin:auto">
-                <center><b>{{room.roomNo}}호</b> ({{room.type}}평형) </center>
+                <center><b>{{room.roomNo}}호</b> ({{room.roomType}}평형) </center>
               </div>
             </v-card-title>
             <v-card-actions>
@@ -101,15 +101,15 @@
               </v-btn>
               <v-spacer></v-spacer>
               <v-btn icon @click="upDownBestIcon(room.roomNo);">
-                <v-icon>{{ room.bestTogle ? 'keyboard_arrow_up' : 'keyboard_arrow_down'  }}</v-icon>
+                <v-icon>{{ room.beBestTogle ? 'keyboard_arrow_up' : 'keyboard_arrow_down'  }}</v-icon>
               </v-btn>
             </v-card-actions>
             <v-slide-y-transition>
-              <v-card-text v-show="room.bestTogle">
+              <v-card-text v-show="room.beBestTogle">
                 <div v-if="room.beReserved == false">
                   <span>
                     예약일 : - <br>
-                    설정온도 : {{room.beSmart ? room.smartTemp:room.setTemp}} <sup>o</sup>C
+                    설정온도 : {{room.isSmart ? room.smartTemp:room.setTemp}} <sup>o</sup>C
                 </span>
                 </div>
                 <div v-else style="margin:auto">
@@ -119,7 +119,7 @@
                     입실시간 : {{room.inTime}} <br>
                     퇴실시간 : {{room.outTime}} <br>
                     접수일 : {{room.resDate}} <br>
-                    설정온도 : {{room.beSmart ? room.smartTemp:room.setTemp}} <sup>o</sup>C <br>
+                    설정온도 : {{room.isSmart ? room.smartTemp:room.setTemp}} <sup>o</sup>C <br>
                   </span>
                 </div>
               </v-card-text>
@@ -144,7 +144,7 @@
             <div v-if="room.roomN0 == 1501">
               <v-divider class="my-3"></v-divider>
             </div>
-            <div v-if="room.type == 18">
+            <div v-if="room.roomType == 18">
               <div v-if="room.beReserved == false">
                 <v-img
                   :src="image1_src"
@@ -169,7 +169,7 @@
                 </v-img>
               </div>
             </div>
-            <div v-else-if="room.type == 30">
+            <div v-else-if="room.roomType == 30">
               <div v-if="room.beReserved == false">
                 <v-img
                   :src="image3_src"
@@ -222,7 +222,7 @@
             </v-scroll-y-transition>
             <v-card-title primary-title>
               <div style="margin:auto">
-                <center><b>{{room.roomNo}}호</b> ({{room.type}}평형) </center>
+                <center><b>{{room.roomNo}}호</b> ({{room.roomType}}평형) </center>
               </div>
             </v-card-title>
             <v-card-actions>
@@ -234,14 +234,14 @@
               </v-btn>
               <v-spacer></v-spacer>
               <v-btn icon @click="upDownIcon(room.roomNo);">
-                <v-icon>{{ room.togle ? 'keyboard_arrow_up' : 'keyboard_arrow_down'  }}</v-icon>
+                <v-icon>{{ room.beRoomTogle ? 'keyboard_arrow_up' : 'keyboard_arrow_down'  }}</v-icon>
               </v-btn>
             </v-card-actions>
             <v-slide-y-transition>
-              <v-card-text v-show="room.togle">
+              <v-card-text v-show="room.beRoomTogle">
                 <div v-if="room.beReserved == false" >
                   예약일 : - <br>
-                  설정온도 : {{room.beSmart ? room.smartTemp:room.setTemp}} <sup>o</sup>C
+                  설정온도 : {{room.isSmart ? room.smartTemp:room.setTemp}} <sup>o</sup>C
                 </div>
                 <div v-else style="margin:auto">
                   <span>
@@ -250,7 +250,7 @@
                     입실시간 : {{room.inTime}} <br>
                     퇴실시간 : {{room.outTime}} <br>
                     접수일 : {{room.resDate}} <br>
-                    설정온도 : {{room.beSmart ? room.smartTemp:room.setTemp}} <sup>o</sup>C <br>
+                    설정온도 : {{room.isSmart ? room.smartTemp:room.setTemp}} <sup>o</sup>C <br>
                   </span>
                 </div>
               </v-card-text>
@@ -275,7 +275,7 @@
             <div v-if="room.roomN0 == 1501">
               <v-divider class="my-3"></v-divider>
             </div>
-            <div v-if="room.type == 18">
+            <div v-if="room.roomType == 18">
               <div v-if="room.beReserved == false">
                 <v-img
                   :src="image1_src"
@@ -300,7 +300,7 @@
                 </v-img>
               </div>
             </div>
-            <div v-else-if="room.type == 30">
+            <div v-else-if="room.roomType == 30">
               <div v-if="room.beReserved == false">
                 <v-img
                   :src="image3_src"
@@ -353,7 +353,7 @@
             </v-scroll-y-transition>
             <v-card-title primary-title>
               <div style="margin:auto">
-                <center><b>{{room.roomNo}}호</b> ({{room.type}}평형) </center>
+                <center><b>{{room.roomNo}}호</b> ({{room.roomType}}평형) </center>
               </div>
             </v-card-title>
             <v-card-actions>
@@ -365,14 +365,14 @@
               </v-btn>
               <v-spacer></v-spacer>
               <v-btn icon @click="upDownIcon(room.roomNo);">
-                <v-icon>{{ room.togle ? 'keyboard_arrow_up' : 'keyboard_arrow_down'  }}</v-icon>
+                <v-icon>{{ room.beRoomTogle ? 'keyboard_arrow_up' : 'keyboard_arrow_down'  }}</v-icon>
               </v-btn>
             </v-card-actions>
             <v-slide-y-transition>
-              <v-card-text v-show="room.togle">
+              <v-card-text v-show="room.beRoomTogle">
                 <div v-if="room.beReserved == false" >
                   예약일 : - <br>
-                  설정온도 : {{room.beSmart ? room.smartTemp:room.setTemp}} <sup>o</sup>C
+                  설정온도 : {{room.isSmart ? room.smartTemp:room.setTemp}} <sup>o</sup>C
                 </div>
                 <div v-else style="margin:auto">
                   <span>
@@ -381,7 +381,7 @@
                     입실시간 : {{room.inTime}} <br>
                     퇴실시간 : {{room.outTime}} <br>
                     접수일 : {{room.resDate}} <br>
-                    설정온도 : {{room.beSmart ? room.smartTemp:room.setTemp}} <sup>o</sup>C <br>
+                    설정온도 : {{room.isSmart ? room.smartTemp:room.setTemp}} <sup>o</sup>C <br>
                   </span>
                 </div>
               </v-card-text>
@@ -405,7 +405,7 @@
             <div v-if="room.roomN0 == 1501">
               <v-divider class="my-3"></v-divider>
             </div>
-            <div v-if="room.type == 18">
+            <div v-if="room.roomType == 18">
               <div v-if="room.beReserved == false">
                 <v-img
                   :src="image1_src"
@@ -430,7 +430,7 @@
                 </v-img>
               </div>
             </div>
-            <div v-else-if="room.type == 30">
+            <div v-else-if="room.roomType == 30">
               <div v-if="room.beReserved == false">
                 <v-img
                   :src="image3_src"
@@ -483,7 +483,7 @@
             </v-scroll-y-transition>
             <v-card-title primary-title>
               <div style="margin:auto">
-                <center><b>{{room.roomNo}}호</b> ({{room.type}}평형) </center>
+                <center><b>{{room.roomNo}}호</b> ({{room.roomType}}평형) </center>
               </div>
             </v-card-title>
             <v-card-actions>
@@ -495,14 +495,14 @@
               </v-btn>
               <v-spacer></v-spacer>
               <v-btn icon @click="upDownIcon(room.roomNo);">
-                <v-icon>{{ room.togle ? 'keyboard_arrow_up' : 'keyboard_arrow_down'  }}</v-icon>
+                <v-icon>{{ room.beRoomTogle ? 'keyboard_arrow_up' : 'keyboard_arrow_down'  }}</v-icon>
               </v-btn>
             </v-card-actions>
             <v-slide-y-transition>
-              <v-card-text v-show="room.togle">
+              <v-card-text v-show="room.beRoomTogle">
                 <div v-if="room.beReserved == false" >
                   예약일 : - <br>
-                  설정온도 : {{room.beSmart ? room.smartTemp:room.setTemp}} <sup>o</sup>C
+                  설정온도 : {{room.isSmart ? room.smartTemp:room.setTemp}} <sup>o</sup>C
                 </div>
                 <div v-else style="margin:auto">
                   <span>
@@ -511,7 +511,7 @@
                     입실시간 : {{room.inTime}} <br>
                     퇴실시간 : {{room.outTime}} <br>
                     접수일 : {{room.resDate}} <br>
-                    설정온도 : {{room.beSmart ? room.smartTemp:room.setTemp}} <sup>o</sup>C <br>
+                    설정온도 : {{room.isSmart ? room.smartTemp:room.setTemp}} <sup>o</sup>C <br>
                   </span>
                 </div>
               </v-card-text>
@@ -747,13 +747,7 @@ export default {
   el: '#key-example',
   name: 'about',
   mounted () {
-    axios.get('http://localhost:3000/api/rooms')
-      .then((r) => {
-        this.rooms = r.data
-      })
-      .catch((e) => {
-        console.error(e.message)
-      })
+    this.getRooms()
   },
   data () {
     return {
@@ -771,7 +765,7 @@ export default {
       rooms: [],
       roomInfo: {
         roomNo: 101,
-        type: 18,
+        roomType: 18,
         pos: 'sea',
         setTemp: 0,
         beReserved: false,
@@ -795,52 +789,61 @@ export default {
     }
   },
   methods: {
+    getRooms () {
+      axios.get('http://localhost:3000/api/rooms')
+        .then((r) => {
+          this.rooms = r.data
+        })
+        .catch((e) => {
+          console.error(e.message)
+        })
+    },
     upDownIcon: function (roomNo) {
       for (var i = 0; i < this.rooms.length; i++) {
-        if (this.rooms[i].roomNo === roomNo) {
-          this.rooms[i].togle = !this.rooms[i].togle
+        if (this.rooms[i].roomNo == roomNo) {
+          this.rooms[i].beRoomTogle = !this.rooms[i].beRoomTogle
           break
         }
       }
     },
     upDownBestIcon: function (roomNo) {
       for (var i = 0; i < this.rooms.length; i++) {
-        if (this.rooms[i].roomNo === roomNo) {
-          this.rooms[i].bestTogle = !this.rooms[i].bestTogle
+        if (this.rooms[i].roomNo == roomNo) {
+          this.rooms[i].beBestTogle = !this.rooms[i].beBestTogle
           break
         }
       }
     },
     reserveRoom: function (roomNo) {
-      this.roomInfo.roomNo = 0
-      this.roomInfo.type = 0
-      this.roomInfo.pos = ''
-      this.roomInfo.smartTemp = 0
-      this.roomInfo.setTemp = 0
-      this.roomInfo.beReserved = false
-      this.roomInfo.peopleCnt = 0
-      this.roomInfo.startDate = ''
-      this.roomInfo.endDate = ''
-      this.roomInfo.inTime = ''
-      this.roomInfo.outTime = ''
-      this.roomInfo.subsName = ''
-      this.roomInfo.subsTel = ''
-      this.startDate = new Date().toISOString().substr(0, 10)
-      this.endDate = new Date().toISOString().substr(0, 10)
-      this.inTime = null
-      this.outTime = null
-      this.roomInfo.beSmart = false
-      this.roomInfo.beBestRoom = false
+      // this.roomInfo.roomNo = 0
+      // this.roomInfo.roomType = 0
+      // this.roomInfo.pos = ''
+      // this.roomInfo.smartTemp = 0
+      // this.roomInfo.setTemp = 0
+      // this.roomInfo.beReserved = false
+      // this.roomInfo.peopleCnt = 0
+      // this.roomInfo.startDate = ''
+      // this.roomInfo.endDate = ''
+      // this.roomInfo.inTime = ''
+      // this.roomInfo.outTime = ''
+      // this.roomInfo.subsName = ''
+      // this.roomInfo.subsTel = ''
+      // this.startDate = new Date().toISOString().substr(0, 10)
+      // this.endDate = new Date().toISOString().substr(0, 10)
+      // this.inTime = null
+      // this.outTime = null
+      // this.roomInfo.isSmart = false
+      // this.roomInfo.isBestRoom = false
       for (var i = 0; i < this.rooms.length; i++) {
-        if (this.rooms[i].roomNo === roomNo) {
+        if (this.rooms[i].roomNo == roomNo) {
           this.roomInfo.roomNo = this.rooms[i].roomNo
-          this.roomInfo.type = this.rooms[i].type
+          this.roomInfo.roomType = this.rooms[i].roomType
           this.roomInfo.pos = this.rooms[i].pos
-          this.roomInfo.beSmart = this.rooms[i].beSmart
-          this.roomInfo.beBestRoom = this.rooms[i].beBestRoom
+          this.roomInfo.isSmart = this.rooms[i].isSmart
+          this.roomInfo.isBestRoom = this.rooms[i].isBestRoom
           this.roomInfo.setTemp = this.rooms[i].setTemp
           this.roomInfo.smartTemp = this.rooms[i].smartTemp
-          if (this.rooms[i].beReserved === false) { break }
+          if (this.rooms[i].beReserved == false) { break }
           this.roomInfo.beReserved = this.rooms[i].beReserved
           this.roomInfo.peopleCnt = this.rooms[i].peopleCnt
           this.startDate = new Date(this.rooms[i].startDate).toISOString().substr(0, 10)
@@ -859,19 +862,19 @@ export default {
       this.$data.rsvRoomModal = true
     },
     settingRoom: function (roomNo) {
-      this.roomInfo.beSmart = false
-      this.roomInfo.beBestRoom = false
+      this.roomInfo.isSmart = false
+      this.roomInfo.isBestRoom = false
       this.roomInfo.smartTemp = 0
       this.roomInfo.setTemp = 0
       this.bestChkbox = false
       this.smartChkbox = false
       for (var i = 0; i < this.rooms.length; i++) {
-        if (this.rooms[i].roomNo === roomNo) {
+        if (this.rooms[i].roomNo == roomNo) {
           this.roomInfo.roomNo = this.rooms[i].roomNo
-          this.roomInfo.type = this.rooms[i].type
+          this.roomInfo.roomType = this.rooms[i].roomType
           this.roomInfo.pos = this.rooms[i].pos
-          this.bestChkbox = this.rooms[i].beBestRoom
-          this.smartChkbox = this.rooms[i].beSmart
+          this.bestChkbox = this.rooms[i].isBestRoom
+          this.smartChkbox = this.rooms[i].isSmart
           this.roomInfo.smartTemp = this.rooms[i].smartTemp
           this.roomInfo.setTemp = this.rooms[i].setTemp
           break
@@ -880,47 +883,83 @@ export default {
       this.$data.settingRoomModal = true
     },
     saveReserveRoom: function (roomNo) {
-      for (var i = 0; i < this.rooms.length; i++) {
-        if (this.rooms[i].roomNo === roomNo) {
-          this.rooms[i].beReserved = true
-          this.rooms[i].peopleCnt = this.roomInfo.peopleCnt
-          this.rooms[i].startDate = this.startDate
-          this.rooms[i].endDate = this.endDate
-          this.rooms[i].inTime = this.inTime
-          this.rooms[i].outTime = this.outTime
-          this.rooms[i].subsName = this.roomInfo.subsName
-          this.rooms[i].subsTel = this.roomInfo.subsTel
-          break
-        }
-      }
-      this.$data.rsvRoomModal = false
+      // for (var i = 0; i < this.rooms.length; i++) {
+      //   if (this.rooms[i].roomNo == roomNo) {
+      //     this.rooms[i].beReserved = true
+      //     this.rooms[i].peopleCnt = this.roomInfo.peopleCnt
+      //     this.rooms[i].startDate = this.startDate
+      //     this.rooms[i].endDate = this.endDate
+      //     this.rooms[i].inTime = this.inTime
+      //     this.rooms[i].outTime = this.outTime
+      //     this.rooms[i].subsName = this.roomInfo.subsName
+      //     this.rooms[i].subsTel = this.roomInfo.subsTel
+      //     break
+      //   }
+      // }
+      axios.put(`http://localhost:3000/api/rooms/$room`, {
+        roomNo: roomNo, beReserved: true, startDate: this.roomInfo.peopleCnt, endDate: this.roomInfo.endDate,
+        inTime: this.roomInfo.inTime, outTime: this.roomInfo.outTime, subsName: this.roomInfo.subsName,
+        subsTel: this.roomInfo.subsTel, peopleCnt: this.roomInfo.peopleCnt
+      })
+        .then((r) => {
+          this.$data.rsvRoomModal = false
+          this.pop('객실 상태 변경')
+          this.getRooms()
+
+        })
+        .catch((e) => {
+          this.pop(e.message)
+        })
     },
     cancelReserveRoom: function (roomNo) {
-      for (var i = 0; i < this.rooms.length; i++) {
-        if (this.rooms[i].roomNo === roomNo) {
-          this.rooms[i].beReserved = false
-          this.rooms[i].peopleCnt = 0
-          this.rooms[i].startDate = ''
-          this.rooms[i].endDate = ''
-          this.rooms[i].inTime = ''
-          this.rooms[i].outTime = ''
-          this.rooms[i].subsName = ''
-          this.rooms[i].subsTel = ''
-          break
-        }
-      }
-      this.$data.rsvRoomModal = false
+      // for (var i = 0; i < this.rooms.length; i++) {
+      //   if (this.rooms[i].roomNo == roomNo) {
+      //     this.rooms[i].beReserved = false
+      //     this.rooms[i].peopleCnt = 0
+      //     this.rooms[i].startDate = ''
+      //     this.rooms[i].endDate = ''
+      //     this.rooms[i].inTime = ''
+      //     this.rooms[i].outTime = ''
+      //     this.rooms[i].subsName = ''
+      //     this.rooms[i].subsTel = ''
+      //     break
+      //   }
+      // }
+      axios.put(`http://localhost:3000/api/rooms/$room`, {
+        roomNo: roomNo, beReserved: false, startDate: this.roomInfo.peopleCnt, endDate: this.roomInfo.endDate,
+        inTime: this.roomInfo.inTime, outTime: this.roomInfo.outTime, subsName: this.roomInfo.subsName,
+        subsTel: this.roomInfo.subsTel, peopleCnt: this.roomInfo.peopleCnt
+      })
+        .then((r) => {
+          this.$data.rsvRoomModal = false
+          this.pop('객실 상태 변경')
+          this.getRooms()
+
+        })
+        .catch((e) => {
+          this.pop(e.message)
+        })
     },
     saveSettingRoom: function (roomNo) {
-      for (var i = 0; i < this.rooms.length; i++) {
-        if (this.rooms[i].roomNo === roomNo) {
-          this.rooms[i].beSmart = this.smartChkbox
-          this.rooms[i].beBestRoom = this.bestChkbox
-          this.rooms[i].setTemp = this.roomInfo.setTemp
-          break
-        }
-      }
-      this.$data.settingRoomModal = false
+      // for (var i = 0; i < this.rooms.length; i++) {
+      //   if (this.rooms[i].roomNo == roomNo) {
+      //     this.rooms[i].isSmart = this.smartChkbox
+      //     this.rooms[i].isBestRoom = this.bestChkbox
+      //     this.rooms[i].setTemp = this.roomInfo.setTemp
+      //     break
+      //   }
+      // }
+      axios.put(`http://localhost:3000/api/rooms/$roomTemp`, {
+        roomNo: roomNo, isBestRoom:  this.bestChkbox, isSmart: this.smartChkbox, setTemp: this.roomInfo.setTemp
+      })
+        .then((r) => {
+          this.$data.rsvRoomModal = false
+          this.pop('객실 상태 변경')
+          this.getRooms()
+        })
+        .catch((e) => {
+          this.pop(e.message)
+        })
     },
     setTemp: function (roomNo) {
       alert('setTemp ' + roomNo)

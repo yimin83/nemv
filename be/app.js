@@ -8,6 +8,9 @@ const cors = require('cors')
 
 var app = express();
 
+var mysqlDB = require('./routes/mysql-db');
+mysqlDB.connect();
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
