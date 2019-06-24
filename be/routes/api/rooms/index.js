@@ -10,13 +10,13 @@ router.get('/', function(req, res, next) {
     }
     else{
       res.json(result);
-      console.log(result)
+      // console.log(result)
     }
   });
 });
 
 router.post('/', (req, res, next) => { // 생성
-  mysqlDB.query("INSERT INTO products (name, modelnumber, series) VALUES (?, ?, ?)", [
+  mysqlDB.query("INSERT INTO rooms (name, modelnumber, series) VALUES (?, ?, ?)", [
       body.name, body.modelnumber, body.series
     ], function(){
       res.redirect("/");
@@ -24,35 +24,41 @@ router.post('/', (req, res, next) => { // 생성
 });
 
 router.put('/:type', (req, res, next) => { // 수정
-  const type = req.param.type
+  const type = req.params.type
   if(type == "room"){
+    console.log(req.body)
     const { roomNo, beReserved, startDate, endDate, inTime, outTime, subsName, subsTel, peopleCnt }  = req.body
-    mysqlDB.query('update ROOMS set beReserved=?, startDate=?, endDate=?, inTime=?, outTime=?, subsName=?, subsTel=?, peopleCnt=? where id=?',
+    mysqlDB.query('update rooms set beReserved=?, startDate=?, endDate=?, inTime=?, outTime=?, subsName=?, subsTel=?, peopleCnt=? where roomNo=?',
       [beReserved, startDate, endDate, inTime, outTime, subsName, subsTel, peopleCnt, roomNo], function (err, rows, fields) {
         if (!err) {
-          res.redirect("/");
+          console.log("room put ok")
+          res.send({ success: true })
         } else {
             res.send('error : ' + err);
+            console.log(err)
         }
     });
   }else {
     const { roomNo, isBestRoom, isSmart, setTemp }  = req.body
-    mysqlDB.query('update ROOMS set isBestRoom=?, isSmart=?, setTemp=? where id=?',
+    mysqlDB.query('update rooms set isBestRoom=?, isSmart=?, setTemp=? where roomNo=?',
       [isBestRoom, isSmart, setTemp, roomNo], function (err, rows, fields) {
         if (!err) {
-          res.redirect("/");
+          res.send({ success: true })
+          console.log("temp put ok")
         } else {
             res.send('error : ' + err);
+            console.log(err)
         }
     });
   }
 });
 
 router.delete('/:roomNo', (req, res, next) => { // 삭제
-  const roomNo = req.params.roomNo
-  mysqlDB.query('delete from ROOMS where id=?', [roomNo], function (err, rows, fields) {
+  const roomNo = req.paramss.roomNo
+  mysqlDB.query('delete from rooms where id=?', [roomNo], function (err, rows, fields) {
       if (!err) {
-          res.redirect("/");
+        res.send({ success: true })
+        console.log("delete ok")
       } else {
           res.send('error : ' + err);
       }

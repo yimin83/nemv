@@ -678,6 +678,7 @@
             <v-btn color="blue darken-1" flat @click="saveReserveRoom(roomInfo.roomNo)">예약</v-btn>
           </div>
           <div v-else>
+            <v-btn color="blue darken-1" flat @click="saveReserveRoom(roomInfo.roomNo)">예약변경</v-btn>
             <v-btn color="blue darken-1" flat @click="cancelReserveRoom(roomInfo.roomNo)">예약취소</v-btn>
           </div>
           <v-btn color="blue darken-1" flat @click.native="rsvRoomModal = false">닫기</v-btn>
@@ -785,7 +786,8 @@ export default {
       inTime: null,
       inMenu: false,
       outTime: null,
-      outMenu: false
+      outMenu: false,
+      type: 'room'
     }
   },
   methods: {
@@ -815,27 +817,13 @@ export default {
       }
     },
     reserveRoom: function (roomNo) {
-      // this.roomInfo.roomNo = 0
-      // this.roomInfo.roomType = 0
-      // this.roomInfo.pos = ''
-      // this.roomInfo.smartTemp = 0
-      // this.roomInfo.setTemp = 0
-      // this.roomInfo.beReserved = false
-      // this.roomInfo.peopleCnt = 0
-      // this.roomInfo.startDate = ''
-      // this.roomInfo.endDate = ''
-      // this.roomInfo.inTime = ''
-      // this.roomInfo.outTime = ''
-      // this.roomInfo.subsName = ''
-      // this.roomInfo.subsTel = ''
-      // this.startDate = new Date().toISOString().substr(0, 10)
-      // this.endDate = new Date().toISOString().substr(0, 10)
-      // this.inTime = null
-      // this.outTime = null
-      // this.roomInfo.isSmart = false
-      // this.roomInfo.isBestRoom = false
+      this.startDate = new Date().toISOString().substr(0, 10)
+      this.endDate = new Date().toISOString().substr(0, 10)
+      this.inTime = ''
+      this.outTime = ''
       for (var i = 0; i < this.rooms.length; i++) {
         if (this.rooms[i].roomNo == roomNo) {
+          console.log('startData : ' + this.rooms[i].startDate + 'endDate : ' + this.rooms[i].endDate +'resDate : ' + this.rooms[i].resDate)
           this.roomInfo.roomNo = this.rooms[i].roomNo
           this.roomInfo.roomType = this.rooms[i].roomType
           this.roomInfo.pos = this.rooms[i].pos
@@ -846,14 +834,14 @@ export default {
           if (this.rooms[i].beReserved == false) { break }
           this.roomInfo.beReserved = this.rooms[i].beReserved
           this.roomInfo.peopleCnt = this.rooms[i].peopleCnt
-          this.startDate = new Date(this.rooms[i].startDate).toISOString().substr(0, 10)
-          this.endDate = new Date(this.rooms[i].endDate).toISOString().substr(0, 10)
-          this.roomInfo.startDate = this.rooms[i].startDate
-          this.roomInfo.endDate = this.rooms[i].endDate
-          this.inTime = this.rooms[i].inTime
-          this.outTime = this.rooms[i].outTime
-          this.roomInfo.inTime = this.rooms[i].inTime
-          this.roomInfo.outTime = this.rooms[i].outTime
+          if (this.rooms[i].startDate.trim() != "")
+            this.startDate = new Date(this.rooms[i].startDate).toISOString().substr(0, 10)
+          if (this.rooms[i].endDate.trim() != "")
+            this.endDate = new Date(this.rooms[i].endDate).toISOString().substr(0, 10)
+          if (this.rooms[i].inTime.trim() != "")
+            this.inTime = this.rooms[i].inTime
+          if (this.rooms[i].outTime.trim() != "")
+            this.outTime = this.rooms[i].outTime
           this.roomInfo.subsName = this.rooms[i].subsName
           this.roomInfo.subsTel = this.rooms[i].subsTel
           break
@@ -871,8 +859,6 @@ export default {
       for (var i = 0; i < this.rooms.length; i++) {
         if (this.rooms[i].roomNo == roomNo) {
           this.roomInfo.roomNo = this.rooms[i].roomNo
-          this.roomInfo.roomType = this.rooms[i].roomType
-          this.roomInfo.pos = this.rooms[i].pos
           this.bestChkbox = this.rooms[i].isBestRoom
           this.smartChkbox = this.rooms[i].isSmart
           this.roomInfo.smartTemp = this.rooms[i].smartTemp
@@ -883,86 +869,51 @@ export default {
       this.$data.settingRoomModal = true
     },
     saveReserveRoom: function (roomNo) {
-      // for (var i = 0; i < this.rooms.length; i++) {
-      //   if (this.rooms[i].roomNo == roomNo) {
-      //     this.rooms[i].beReserved = true
-      //     this.rooms[i].peopleCnt = this.roomInfo.peopleCnt
-      //     this.rooms[i].startDate = this.startDate
-      //     this.rooms[i].endDate = this.endDate
-      //     this.rooms[i].inTime = this.inTime
-      //     this.rooms[i].outTime = this.outTime
-      //     this.rooms[i].subsName = this.roomInfo.subsName
-      //     this.rooms[i].subsTel = this.roomInfo.subsTel
-      //     break
-      //   }
-      // }
-      axios.put(`http://localhost:3000/api/rooms/$room`, {
-        roomNo: roomNo, beReserved: true, startDate: this.roomInfo.peopleCnt, endDate: this.roomInfo.endDate,
-        inTime: this.roomInfo.inTime, outTime: this.roomInfo.outTime, subsName: this.roomInfo.subsName,
-        subsTel: this.roomInfo.subsTel, peopleCnt: this.roomInfo.peopleCnt
+      alert("this.roomInfo.inTime : "+ this.roomInfo.inTime + "")
+      this.type = 'room'
+      axios.put(`http://localhost:3000/api/rooms/${this.type}`, {
+        roomNo: roomNo, beReserved: true, startDate: this.startDate , endDate: this.endDate , inTime: this.inTime , outTime: this.outTime , subsName: this.roomInfo.subsName, subsTel: this.roomInfo.subsTel, peopleCnt: this.roomInfo.peopleCnt
       })
         .then((r) => {
           this.$data.rsvRoomModal = false
-          this.pop('객실 상태 변경')
+        //  this.pop('객실 상태 변경')
+          console.log("okok3")
           this.getRooms()
 
         })
         .catch((e) => {
-          this.pop(e.message)
+        //  this.pop(e.message)
+          console.log(e.message)
         })
     },
     cancelReserveRoom: function (roomNo) {
-      // for (var i = 0; i < this.rooms.length; i++) {
-      //   if (this.rooms[i].roomNo == roomNo) {
-      //     this.rooms[i].beReserved = false
-      //     this.rooms[i].peopleCnt = 0
-      //     this.rooms[i].startDate = ''
-      //     this.rooms[i].endDate = ''
-      //     this.rooms[i].inTime = ''
-      //     this.rooms[i].outTime = ''
-      //     this.rooms[i].subsName = ''
-      //     this.rooms[i].subsTel = ''
-      //     break
-      //   }
-      // }
-      axios.put(`http://localhost:3000/api/rooms/$room`, {
-        roomNo: roomNo, beReserved: false, startDate: this.roomInfo.peopleCnt, endDate: this.roomInfo.endDate,
-        inTime: this.roomInfo.inTime, outTime: this.roomInfo.outTime, subsName: this.roomInfo.subsName,
-        subsTel: this.roomInfo.subsTel, peopleCnt: this.roomInfo.peopleCnt
+      this.type = 'room'
+      axios.put(`http://localhost:3000/api/rooms/${this.type}`, {
+        roomNo: roomNo, beReserved: false, startDate: '', endDate: '', inTime: '', outTime: '', subsName: '', subsTel: '', peopleCnt: 0
       })
         .then((r) => {
           this.$data.rsvRoomModal = false
-          this.pop('객실 상태 변경')
+          console.log("okok")
           this.getRooms()
 
         })
         .catch((e) => {
-          this.pop(e.message)
+          console.log(e.message)
         })
     },
     saveSettingRoom: function (roomNo) {
-      // for (var i = 0; i < this.rooms.length; i++) {
-      //   if (this.rooms[i].roomNo == roomNo) {
-      //     this.rooms[i].isSmart = this.smartChkbox
-      //     this.rooms[i].isBestRoom = this.bestChkbox
-      //     this.rooms[i].setTemp = this.roomInfo.setTemp
-      //     break
-      //   }
-      // }
-      axios.put(`http://localhost:3000/api/rooms/$roomTemp`, {
-        roomNo: roomNo, isBestRoom:  this.bestChkbox, isSmart: this.smartChkbox, setTemp: this.roomInfo.setTemp
+      this.type = 'roomTemp'
+      axios.put(`http://localhost:3000/api/rooms/${this.type}`, {
+        roomNo: roomNo, isBestRoom: this.bestChkbox, isSmart: this.smartChkbox, setTemp: this.roomInfo.setTemp
       })
         .then((r) => {
           this.$data.rsvRoomModal = false
-          this.pop('객실 상태 변경')
+          console.log("okok2")
           this.getRooms()
         })
         .catch((e) => {
-          this.pop(e.message)
+          console.log(e.message)
         })
-    },
-    setTemp: function (roomNo) {
-      alert('setTemp ' + roomNo)
     }
   }
 }
