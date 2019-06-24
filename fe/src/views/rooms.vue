@@ -99,12 +99,12 @@
               <v-btn fab dark small left color="primary" @click="settingRoom(room.roomNo);">
                 <v-icon dark>wb_sunny</v-icon>
               </v-btn>
-              <v-spacer></v-spacer>
+              <!-- <v-spacer></v-spacer>
               <v-btn icon @click="upDownBestIcon(room.roomNo);">
                 <v-icon>{{ room.beBestTogle ? 'keyboard_arrow_up' : 'keyboard_arrow_down'  }}</v-icon>
-              </v-btn>
+              </v-btn> -->
             </v-card-actions>
-            <v-slide-y-transition>
+            <!-- <v-slide-y-transition>
               <v-card-text v-show="room.beBestTogle">
                 <div v-if="room.beReserved == false">
                   <span>
@@ -123,7 +123,7 @@
                   </span>
                 </div>
               </v-card-text>
-            </v-slide-y-transition>
+            </v-slide-y-transition> -->
           </v-card>
         </v-item>
       </v-flex>
@@ -232,12 +232,12 @@
               <v-btn fab dark small left color="primary" @click="settingRoom(room.roomNo);">
                 <v-icon dark>wb_sunny</v-icon>
               </v-btn>
-              <v-spacer></v-spacer>
+              <!-- <v-spacer></v-spacer>
               <v-btn icon @click="upDownIcon(room.roomNo);">
                 <v-icon>{{ room.beRoomTogle ? 'keyboard_arrow_up' : 'keyboard_arrow_down'  }}</v-icon>
-              </v-btn>
+              </v-btn> -->
             </v-card-actions>
-            <v-slide-y-transition>
+            <!-- <v-slide-y-transition>
               <v-card-text v-show="room.beRoomTogle">
                 <div v-if="room.beReserved == false" >
                   예약일 : - <br>
@@ -254,7 +254,7 @@
                   </span>
                 </div>
               </v-card-text>
-            </v-slide-y-transition>
+            </v-slide-y-transition> -->
           </v-card>
         </v-item>
       </v-flex>
@@ -363,12 +363,12 @@
               <v-btn fab dark small left color="primary" @click="settingRoom(room.roomNo);">
                 <v-icon dark>wb_sunny</v-icon>
               </v-btn>
-              <v-spacer></v-spacer>
+              <!-- <v-spacer></v-spacer>
               <v-btn icon @click="upDownIcon(room.roomNo);">
                 <v-icon>{{ room.beRoomTogle ? 'keyboard_arrow_up' : 'keyboard_arrow_down'  }}</v-icon>
-              </v-btn>
+              </v-btn> -->
             </v-card-actions>
-            <v-slide-y-transition>
+            <!-- <v-slide-y-transition>
               <v-card-text v-show="room.beRoomTogle">
                 <div v-if="room.beReserved == false" >
                   예약일 : - <br>
@@ -385,7 +385,7 @@
                   </span>
                 </div>
               </v-card-text>
-            </v-slide-y-transition>
+            </v-slide-y-transition> -->
           </v-card>
         </v-item>
       </v-flex>
@@ -493,12 +493,12 @@
               <v-btn fab dark small left color="primary" @click="settingRoom(room.roomNo);">
                 <v-icon dark>wb_sunny</v-icon>
               </v-btn>
-              <v-spacer></v-spacer>
+              <!-- <v-spacer></v-spacer>
               <v-btn icon @click="upDownIcon(room.roomNo);">
                 <v-icon>{{ room.beRoomTogle ? 'keyboard_arrow_up' : 'keyboard_arrow_down'  }}</v-icon>
-              </v-btn>
+              </v-btn> --> -->
             </v-card-actions>
-            <v-slide-y-transition>
+            <!-- <v-slide-y-transition>
               <v-card-text v-show="room.beRoomTogle">
                 <div v-if="room.beReserved == false" >
                   예약일 : - <br>
@@ -515,7 +515,7 @@
                   </span>
                 </div>
               </v-card-text>
-            </v-slide-y-transition>
+            </v-slide-y-transition> -->
           </v-card>
         </v-item>
       </v-flex>
